@@ -4,7 +4,7 @@ const Employee = require('../lib/Employee');
 describe('Employee', () => {
 
     describe('Initialization', () => {
-        it('should create an employee with name, id, and email', () => {
+        it("should create an employee with name, id, and email", () => {
             const employee = new Employee('John', 2, 'John@example.com');
 
             expect(employee.name).toEqual('John');

@@ -52,7 +52,6 @@ const promptUser = () => {
             name: 'officeNumber',
             message: "What is their office number?",
         },
-
         {
             when: input => {
                 return input.role == 'Engineer'
@@ -61,7 +60,6 @@ const promptUser = () => {
             name: 'github',
             message: "What is the engineer's github username?",
         },
-
         {
             when: input => {
                 return input.role == 'Intern'
@@ -70,42 +68,53 @@ const promptUser = () => {
             name: 'school',
             message: "What school is the intern attending?",
         },
-
         {
-            type: 'list',
-            name: 'continue',
-            message: "Would you like to add another employee?",
+            type: 'input',
+            name: 'confirm',
+            message: "Would you like to add another employee?(type yes or no then press enter)",
             choices: ["Yes", "No"]
         }
     ])
-
     .then((answers) => {
         employeeList.push(answers);
 
-        console.log(employeeList);
-
-        if (answers.continue === "Yes"){
+        if (answers.confirm === 'yes') {
+            console.log(employeeList, answers)
             promptUser();
-        }
-
-        else {
-            let employeeCards = "";
-
-            for (var i = 0; i < employeeList.length; i++) {
-                const employeeInfo = employeeHTML(employeeList[i]);
-                
-                employeeCards += employeeInfo;
+        } else {
+            let employeeAnswers = {
+                manCards: '',
+                engCards: '',
+                intCards: '',
             };
-
-            fs.writeFile(`${__dirname}/dist/index.html`, generateHTML(employeeCards), (err) => {
-                if (err) {
-                    throw err;
+            for (let i = 0; i < employeeList.length; i++) {
+                let employees = employeesHTML(employeeList[i]);
+                switch (employeeList[i].role) {
+                    case 'Manager':
+                        employeeAnswers.manCards += employees;
+                        break;
+                    case 'Engineer':
+                        employeeAnswers.engCards += employees;
+                        break;
+                    case 'Intern':
+                        employeeAnswers.intCards += employees;
+                        break;
+                    default:
+                        break;
                 }
-            });
-        };
+            }
+            init(employeeAnswers);
+        }
     })
-
-    .catch((err) => console.error(err));
 };
 
+const writeHTML = util.promisify(fs.writeFile);
+
+const init = (answers) => {
+    writeHTML(`${__dirname}/dist/index.html`, generateHTML(answers))
+        .then(() => console.log('Successfully wrote index.html file!'))
+        .catch((err) => console.log(err));
+}
+
 promptUser();
+

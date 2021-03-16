@@ -10,7 +10,7 @@
   - [License](#license)
 
   ## Demo Video
-  ![Demonstration Video](https://drive.google.com/file/d/1lpjEoARp4BblOaJLBvFRNoRZdkjSXG0g/view?usp=sharing)
+  [Demonstration Video](https://drive.google.com/file/d/1lpjEoARp4BblOaJLBvFRNoRZdkjSXG0g/view?usp=sharing)
 
   ## Description
   An application for creating an HTML page that will display your teams profile.
@@ -29,7 +29,7 @@
 
   ## Questions
   Email address: christmanholmes21@gmail.com
-  GitHub username: [toasted-coder](https://github.com/toasted-coder)](https://github.com/toasted-coder)
+  GitHub username: [[toasted-coder](https://toasted-coder.github.io/)](https://github.com/[toasted-coder](https://toasted-coder.github.io/))
 
 
   ## License
